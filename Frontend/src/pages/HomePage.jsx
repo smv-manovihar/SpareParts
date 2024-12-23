@@ -1,22 +1,16 @@
 import { Container, SimpleGrid, Text, VStack, useColorModeValue } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useProductStore } from "../store/product";
 import ProductCard from "../components/ProductCard";
 
 const HomePage = () => {
   const { fetchProducts, products } = useProductStore();
   
-  // Use custom theme colors
-  const headingColor = useColorModeValue("custom.bgLight", "custom.bgDark");
-  const linkColor = useColorModeValue("blue.500", "blue.300");
   const textColor = useColorModeValue("custom.textLight", "custom.textDark");
 
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
-  
-  console.log("products", products);
 
   return (
     <Container maxW='container.xl' py={12}>
@@ -46,12 +40,7 @@ const HomePage = () => {
 
         {products.length === 0 && (
           <Text fontSize='xl' textAlign={"center"} fontWeight='bold' color={textColor}>
-            No products found{" "}
-            <Link to={"/create"}>
-              <Text as='span' color={linkColor} _hover={{ textDecoration: "underline" }}>
-                Create a product
-              </Text>
-            </Link>
+            No products found
           </Text>
         )}
       </VStack>
